@@ -4,6 +4,7 @@
 
 require "jekyll"
 
+require "lanyon/application"
 require "lanyon/version"
 
 
@@ -39,7 +40,7 @@ module Lanyon
       build(config)
     end
 
-    # Application.new
+    Application.new
   end
 
   # @private
