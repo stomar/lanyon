@@ -33,6 +33,12 @@ module Lanyon
 
     config = jekyll_config(options)
 
+    if skip_build
+      puts skip_build_warning
+    else
+      build(config)
+    end
+
     # Application.new
   end
 
@@ -47,5 +53,17 @@ module Lanyon
     default_options.each_key {|key| overrides.delete(key) }
 
     ::Jekyll.configuration(overrides)
+  end
+
+  # @private
+  def self.skip_build_warning  # :nodoc:
+    "Build warning: Skipping the initial build."
+  end
+
+  # @private
+  def self.build(config)  # :nodoc:
+    site = ::Jekyll::Site.new(config)
+    puts "Generating site: #{site.source} -> #{site.dest}"
+    site.process
   end
 end

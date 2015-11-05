@@ -11,6 +11,8 @@ TEMP_DIR = File.join(TEST_DIR, "tmp")
 
 def setup_tempdir
   FileUtils.mkdir_p(TEMP_DIR)
+
+  File.exist?(TEMP_DIR) ? TEMP_DIR : nil
 end
 
 def teardown_tempdir
@@ -19,6 +21,10 @@ end
 
 def chdir_tempdir
   Dir.chdir(TEMP_DIR)
+end
+
+def sourcedir
+  File.join(TEST_DIR, "source")
 end
 
 
