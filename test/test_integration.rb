@@ -36,11 +36,11 @@ describe "when handling requests" do
     end
 
     it "returns correct Content-Length header" do
-      @response.original_headers["Content-Length"].must_equal "14"
+      @response.original_headers["Content-Length"].must_equal "17"
     end
 
     it "returns correct body" do
-      @response.body.must_equal "Test Response\n"
+      @response.body.must_match %r{<p>Home Page</p>}
     end
   end
 

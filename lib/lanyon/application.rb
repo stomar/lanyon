@@ -23,11 +23,17 @@ module Lanyon
       when :not_found
         not_found_response
       else
-        [200, { "Content-Length" => "14" }, ["Test Response\n"]]
+        response(endpoint)
       end
     end
 
     private
+
+    def response(filename)  # :nodoc:
+      response = Rack::Response.new(File.read(filename))
+
+      response.finish
+    end
 
     def html_wrap(title, content)  # :nodoc:
       <<-document.gsub(/^ {6}/, "")
