@@ -9,19 +9,21 @@ module Lanyon
   # Not to be instantiated directly, use Lanyon.application instead.
   class Application
 
-    attr_reader :root
+    attr_reader :router
 
-    def initialize(root)
-      @root = File.expand_path(root)
+    def initialize(router)
+      @router = router
     end
 
     def call(env)
       request = Rack::Request.new(env)
+      endpoint = router.endpoint(request.path_info)
 
-      if request.path_info == "/"
-        [200, { "Content-Length" => "14" }, ["Test Response\n"]]
-      else
+      case endpoint
+      when :not_found
         not_found_response
+      else
+        [200, { "Content-Length" => "14" }, ["Test Response\n"]]
       end
     end
 
@@ -46,9 +48,7 @@ module Lanyon
     end
 
     def custom_404_body  # :nodoc:
-      filename = File.join(root, "404.html")
-
-      File.exist?(filename) ? File.read(filename) : nil
+      router.custom_404_body
     end
 
     def not_found_response  # :nodoc:

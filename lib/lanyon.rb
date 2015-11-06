@@ -5,6 +5,7 @@
 require "jekyll"
 
 require "lanyon/application"
+require "lanyon/router"
 require "lanyon/version"
 
 
@@ -41,8 +42,9 @@ module Lanyon
     end
 
     destination = config["destination"]
+    router = Router.new(destination)
 
-    Application.new(destination)
+    Application.new(router)
   end
 
   # @private
