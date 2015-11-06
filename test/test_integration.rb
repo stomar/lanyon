@@ -56,11 +56,12 @@ describe "when handling requests" do
     end
 
     it "returns correct Content-Length header" do
-      @response.original_headers["Content-Length"].must_equal "15"
+      @response.original_headers["Content-Length"].must_equal "142"
     end
 
     it "returns correct body" do
-      @response.body.must_equal "404: Not Found\n"
+      expected = %r{<!DOCTYPE html>.*<p>404: Not Found</p>}m
+      @response.body.must_match expected
     end
   end
 end
