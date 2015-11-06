@@ -9,6 +9,12 @@ module Lanyon
   # Not to be instantiated directly, use Lanyon.application instead.
   class Application
 
+    attr_reader :root
+
+    def initialize(root)
+      @root = File.expand_path(root)
+    end
+
     def call(env)
       request = Rack::Request.new(env)
 
@@ -40,7 +46,9 @@ module Lanyon
     end
 
     def custom_404_body  # :nodoc:
-      nil
+      filename = File.join(root, "404.html")
+
+      File.exist?(filename) ? File.read(filename) : nil
     end
 
     def not_found_response  # :nodoc:

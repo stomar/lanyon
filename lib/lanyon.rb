@@ -40,7 +40,9 @@ module Lanyon
       build(config)
     end
 
-    Application.new
+    destination = config["destination"]
+
+    Application.new(destination)
   end
 
   # @private
