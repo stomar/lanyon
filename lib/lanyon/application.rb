@@ -22,6 +22,8 @@ module Lanyon
       case endpoint
       when :not_found
         not_found_response
+      when :must_redirect
+        redirect_to_dir_response(request.path_info)
       else
         response(endpoint)
       end
@@ -63,6 +65,27 @@ module Lanyon
       response = Rack::Response.new(body)
       response.status = 404
       response["Content-Type"] = "text/html"
+
+      response.finish
+    end
+
+    def redirect_message(to_path)  # :nodoc:
+      %Q{<a href="#{to_path}">#{to_path}</a>\n}
+    end
+
+    def redirect_to_dir_response(from_path)  # :nodoc:
+      location = from_path.dup
+      location << "/"  unless location.end_with?("/")
+
+      cache_time = 3600
+
+      body = redirect_message(location)
+
+      response = Rack::Response.new(body)
+      response.status = 301
+      response["Location"]      = location
+      response["Cache-Control"] = "max-age=#{cache_time}, must-revalidate"
+      response["Expires"]       = (Time.now + cache_time).httpdate
 
       response.finish
     end

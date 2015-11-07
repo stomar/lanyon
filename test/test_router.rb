@@ -65,8 +65,8 @@ describe Lanyon::Router do
       @router.endpoint("/dir-with-index/").must_equal filename
     end
 
-    it "returns :not_found for '/path/to/dir' with index" do
-      @router.endpoint("/dir-with-index").must_equal :not_found
+    it "returns :must_redirect for '/path/to/dir' with index" do
+      @router.endpoint("/dir-with-index").must_equal :must_redirect
     end
 
     it "returns :not_found for '/path/to/dir/' without index" do

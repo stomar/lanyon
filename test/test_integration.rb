@@ -140,7 +140,6 @@ describe "when handling requests" do
   describe "when a directory is requested" do
 
     it "redirects to 'directory/' for 'directory' with index.html" do
-      skip
       @request.get("/dir-with-index").status.must_equal 301
     end
 
@@ -158,6 +157,31 @@ describe "when handling requests" do
 
     it "returns status 404 for 'directory/' without index.html" do
       @request.get("/dir-without-index/").status.must_equal 404
+    end
+  end
+
+
+  describe "when redirecting to URL with trailing slash" do
+
+    before do
+      @response = @request.get("/dir-with-index")
+    end
+
+    it "returns status 301" do
+      @response.status.must_equal 301
+    end
+
+    it "returns correct Location header" do
+      @response.headers["Location"].must_equal "/dir-with-index/"
+    end
+
+    it "returns a Cache-Control header" do
+      @response.headers["Cache-Control"].wont_be_nil
+    end
+
+    it "returns correct body" do
+      expected = %r{<a href="/dir-with-index/">}m
+      @request.get("/dir-with-index").body.must_match expected
     end
   end
 
