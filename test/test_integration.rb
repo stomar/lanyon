@@ -41,6 +41,15 @@ describe "when handling requests" do
       @response.original_headers["Content-Length"].must_equal "17"
     end
 
+    it "returns correct Content-Type header" do
+      @response.headers["Content-Type"].must_equal "text/html"
+    end
+
+    it "returns correct Last-Modified header" do
+      mtime = File.mtime(@destdir + "/index.html")
+      @response.headers["Last-Modified"].must_equal mtime.httpdate
+    end
+
     it "returns correct body" do
       @response.body.must_match %r{<p>Home Page</p>}
     end
@@ -59,6 +68,10 @@ describe "when handling requests" do
 
     it "returns correct Content-Length header" do
       @response.original_headers["Content-Length"].must_equal "142"
+    end
+
+    it "returns correct Content-Type header" do
+      @response.headers["Content-Type"].must_equal "text/html"
     end
 
     it "returns correct body" do
@@ -87,6 +100,10 @@ describe "when handling requests" do
       @response.original_headers["Content-Length"].must_equal "10"
     end
 
+    it "returns correct Content-Type header" do
+      @response.headers["Content-Type"].must_equal "text/html"
+    end
+
     it "returns correct body" do
       @response.body.must_equal "Custom 404"
     end
@@ -101,6 +118,10 @@ describe "when handling requests" do
 
     it "returns status 200" do
       @response.status.must_equal 200
+    end
+
+    it "returns correct Content-Type header" do
+      @response.headers["Content-Type"].must_equal "text/html"
     end
 
     it "returns correct Content-Length header" do
@@ -121,6 +142,25 @@ describe "when handling requests" do
 
     it "returns status 200" do
       @response.status.must_equal 200
+    end
+
+    it "returns Content-Type 'application/octet-stream'" do
+      type = @response.headers["Content-Type"]
+      type.must_equal "application/octet-stream"
+    end
+  end
+
+
+  describe "when asked for resources with various media types" do
+
+    it "returns correct Content-Type for *.css" do
+      type = @request.get("/css/test.css").headers["Content-Type"]
+      type.must_equal "text/css"
+    end
+
+    it "returns correct Content-Type for *.min.js" do
+      type = @request.get("/js/test.min.js").headers["Content-Type"]
+      type.must_equal "application/javascript"
     end
   end
 
