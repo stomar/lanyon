@@ -240,4 +240,32 @@ describe "when handling requests" do
       @response.original_headers["Content-Length"].must_equal "23"
     end
   end
+
+
+  describe "when handling If-Modified-Since requests" do
+
+    before do
+      modify_time  = @request.get("/").headers["Last-Modified"]
+      earlier_time = (Time.parse(modify_time) - 3600).httpdate
+      @modify_time_header  = { "HTTP_IF_MODIFIED_SINCE" => modify_time }
+      @earlier_time_header = { "HTTP_IF_MODIFIED_SINCE" => earlier_time }
+    end
+
+    it "returns correct status code for unchanged '/'" do
+      @request.get("/", @modify_time_header).status.must_equal 304
+    end
+
+    it "does not return a Content-Length header for unchanged '/'" do
+      response = @request.get("/", @modify_time_header)
+      response.original_headers["Content-Length"].must_be_nil
+    end
+
+    it "returns correct status code for updated '/'" do
+      @request.get("/", @earlier_time_header).status.must_equal 200
+    end
+
+    it "returns correct status code for 404" do
+      @request.get("/not/a/page", @earlier_time_header).status.must_equal 404
+    end
+  end
 end
