@@ -268,4 +268,20 @@ describe "when handling requests" do
       @request.get("/not/a/page", @earlier_time_header).status.must_equal 404
     end
   end
+
+
+  describe "when handling HEAD requests" do
+
+    it "returns status 200 for '/'" do
+      @request.head("/").status.must_equal 200
+    end
+
+    it "returns correct Content-Length header for '/'" do
+      @request.head("/").original_headers["Content-Length"].must_equal "17"
+    end
+
+    it "does not return a body" do
+      @request.head("/").body.must_equal ""
+    end
+  end
 end

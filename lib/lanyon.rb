@@ -45,7 +45,9 @@ module Lanyon
     router = Router.new(destination)
 
     Rack::Builder.new do
+      use Rack::Head
       use Rack::ConditionalGet
+
       run Application.new(router)
     end
   end
