@@ -33,7 +33,7 @@ module Lanyon
         when "OPTIONS"
           [200, { "Allow" => "GET,HEAD,OPTIONS", "Content-Length" => "0" }, []]
         else
-          [405, { "Content-Length" => "0" }, []]
+          not_allowed_response
         end
       end
     end
@@ -44,6 +44,13 @@ module Lanyon
       response = Rack::Response.new(File.read(filename))
       response["Content-Type"]  = media_type(filename)
       response["Last-Modified"] = modification_time(filename)
+
+      response.finish
+    end
+
+    def html_response(body, status, headers = {})  # :nodoc:
+      response = Rack::Response.new(body, status, headers)
+      response["Content-Type"] = "text/html"
 
       response.finish
     end
@@ -83,15 +90,19 @@ module Lanyon
     def not_found_response  # :nodoc:
       body = custom_404_body || default_404_body
 
-      response = Rack::Response.new(body)
-      response.status = 404
-      response["Content-Type"] = "text/html"
-
-      response.finish
+      html_response(body, 404)
     end
 
-    def redirect_message(to_path)  # :nodoc:
-      %Q{<a href="#{to_path}">#{to_path}</a>\n}
+    def not_allowed_response  # :nodoc:
+      body = html_wrap("Error", "<p>405: Method Not Allowed</p>")
+
+      html_response(body, 405)
+    end
+
+    def redirect_body(to_path)  # :nodoc:
+      message = %Q{<p>Redirecting to <a href="#{to_path}">#{to_path}</a>.</p>}
+
+      html_wrap("Redirection", message)
     end
 
     def redirect_to_dir_response(from_path)  # :nodoc:
@@ -100,15 +111,14 @@ module Lanyon
 
       cache_time = 3600
 
-      body = redirect_message(location)
+      body = redirect_body(location)
+      headers = {
+        "Location"      => location,
+        "Cache-Control" => "max-age=#{cache_time}, must-revalidate",
+        "Expires"       => (Time.now + cache_time).httpdate
+      }
 
-      response = Rack::Response.new(body)
-      response.status = 301
-      response["Location"]      = location
-      response["Cache-Control"] = "max-age=#{cache_time}, must-revalidate"
-      response["Expires"]       = (Time.now + cache_time).httpdate
-
-      response.finish
+      html_response(body, 301, headers)
     end
   end
 end

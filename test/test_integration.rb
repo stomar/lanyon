@@ -220,7 +220,7 @@ describe "when handling requests" do
     end
 
     it "returns correct body" do
-      expected = %r{<a href="/dir-with-index/">}m
+      expected = %r{<!DOCTYPE html>.*<a href="/dir-with-index/">}m
       @request.get("/dir-with-index").body.must_match expected
     end
   end
@@ -314,6 +314,11 @@ describe "when handling requests" do
       @request.put("/").status.must_equal 405
       @request.delete("/").status.must_equal 405
       @request.request("OTHER", "/").status.must_equal 405
+    end
+
+    it "returns correct body" do
+      expected = %r{<!DOCTYPE html>.*<p>405: Method Not Allowed</p>}m
+      @request.post("/").body.must_match expected
     end
   end
 end
