@@ -284,4 +284,36 @@ describe "when handling requests" do
       @request.head("/").body.must_equal ""
     end
   end
+
+
+  describe "when handling OPTIONS requests" do
+
+    it "returns status 200" do
+      @request.options("/").status.must_equal 200
+    end
+
+    it "returns correct Allow header" do
+      @request.options("/").original_headers["Allow"].must_equal "GET,HEAD,OPTIONS"
+    end
+
+    it "does not return a body" do
+      @request.options("/").body.must_equal ""
+    end
+
+    it "returns 404 for nonexistent resource" do
+      @request.options("/not/a/page").status.must_equal 404
+      @request.options("/not/a/page").body.must_match %r{<p>404: Not Found</p>}
+    end
+  end
+
+
+  describe "when handling POST, PUT, DELETE, and other requests" do
+
+    it "returns status 405" do
+      @request.post("/").status.must_equal 405
+      @request.put("/").status.must_equal 405
+      @request.delete("/").status.must_equal 405
+      @request.request("OTHER", "/").status.must_equal 405
+    end
+  end
 end

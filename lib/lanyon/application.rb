@@ -27,7 +27,14 @@ module Lanyon
       when :must_redirect
         redirect_to_dir_response(request.path_info)
       else
-        response(endpoint)
+        case request.request_method
+        when "HEAD", "GET"
+          response(endpoint)
+        when "OPTIONS"
+          [200, { "Allow" => "GET,HEAD,OPTIONS", "Content-Length" => "0" }, []]
+        else
+          [405, { "Content-Length" => "0" }, []]
+        end
       end
     end
 
