@@ -3,6 +3,7 @@
 # See Lanyon module for documentation.
 
 require "jekyll"
+require "rack"
 
 require "lanyon/application"
 require "lanyon/router"
