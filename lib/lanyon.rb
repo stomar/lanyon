@@ -40,7 +40,7 @@ module Lanyon
     if skip_build
       puts skip_build_warning
     else
-      build(config)
+      process(config)
     end
 
     destination = config["destination"]
@@ -77,7 +77,7 @@ module Lanyon
   # Wraps Jekyll::Site's process method that builds the site.
   #
   # Takes a Jekyll configuration hash as argument.
-  def self.build(config)  # :nodoc:
+  def self.process(config)  # :nodoc:
     site = ::Jekyll::Site.new(config)
     puts "Generating site: #{site.source} -> #{site.dest}"
     site.process
