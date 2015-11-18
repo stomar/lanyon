@@ -19,7 +19,8 @@ require "lanyon/version"
 #
 module Lanyon
 
-  # Builds the Jekyll site and returns a Rack application.
+  # Builds the Jekyll site, prepares the middleware stack,
+  # and returns the Rack application.
   #
   # Options:
   #
@@ -72,6 +73,10 @@ module Lanyon
   end
 
   # @private
+  #
+  # Wraps Jekyll::Site's process method that builds the site.
+  #
+  # Takes a Jekyll configuration hash as argument.
   def self.build(config)  # :nodoc:
     site = ::Jekyll::Site.new(config)
     puts "Generating site: #{site.source} -> #{site.dest}"
