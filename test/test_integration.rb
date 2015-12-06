@@ -245,11 +245,29 @@ describe "when handling requests" do
     end
 
     it "returns correct body" do
-      @response.body.must_match %r{<p>¡Buenos días!</p>}
+      response_body = @response.body.force_encoding("UTF-8")
+      response_body.must_match %r{<p>¡Buenos días!</p>}
     end
 
     it "returns the bytesize as Content-Length header" do
       @response.original_headers["Content-Length"].must_equal "23"
+    end
+  end
+
+
+  describe "when resource contains CRLF newlines" do
+
+    before do
+      @response = @request.get("/crlf.dat")
+    end
+
+    it "returns correct body" do
+      expected = "File\r\nwith\r\nCRLF\r\nnewlines\r\n"
+      @response.body.must_equal expected
+    end
+
+    it "returns the bytesize as Content-Length header" do
+      @response.original_headers["Content-Length"].must_equal "28"
     end
   end
 

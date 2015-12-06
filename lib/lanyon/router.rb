@@ -38,7 +38,7 @@ module Lanyon
     def custom_404_body
       filename = File.join(root, "404.html")
 
-      File.exist?(filename) ? File.read(filename) : nil
+      File.exist?(filename) ? File.binread(filename) : nil
     end
 
     private
