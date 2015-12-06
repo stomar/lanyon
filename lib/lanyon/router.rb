@@ -17,17 +17,12 @@ module Lanyon
     # - +:must_redirect+ if the request must be redirected to <tt>path/</tt>.
     #
     def endpoint(path)
-      fullpath = File.join(@root, path)
+      normalized = normalize_path_info(path)
 
-      if fullpath.end_with?("/")
-        normalized = fullpath + "index.html"
-      else
-        normalized = fullpath
-      end
-
-      endpoint = if FileTest.file?(normalized)
-                   normalized
-                 elsif needs_redirect_to_dir?(normalized)
+      fullpath = File.join(@root, normalized)
+      endpoint = if FileTest.file?(fullpath)
+                   fullpath
+                 elsif needs_redirect_to_dir?(fullpath)
                    :must_redirect
                  else
                    :not_found
@@ -47,6 +42,16 @@ module Lanyon
 
     def needs_redirect_to_dir?(fullpath)  # :nodoc:
       !fullpath.end_with?("/") && FileTest.file?(fullpath + "/index.html")
+    end
+
+    def normalize_path_info(path)
+      if path.end_with?("/")
+        normalized = path + "index.html"
+      else
+        normalized = path
+      end
+
+      normalized
     end
   end
 end
