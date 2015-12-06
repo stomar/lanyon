@@ -177,6 +177,18 @@ describe "when handling requests" do
   end
 
 
+  describe "when asked for paths with directory traversal" do
+
+    it "returns status 404 for unsafe directory traversal" do
+      filename = File.join(@destdir, "/../_site/index.html")
+      assert File.exist?(filename)
+
+      @response = @request.get("/../_site/index.html")
+      @response.status.must_equal 404
+    end
+  end
+
+
   describe "when a directory is requested" do
 
     it "redirects to 'directory/' for 'directory' with index.html" do

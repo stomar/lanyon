@@ -79,6 +79,35 @@ describe Lanyon::Router do
   end
 
 
+  describe "when asked for paths with directory traversal" do
+
+    it "discards leading '..' for existing path" do
+      filename = File.join(@sitedir, "page.html")
+      @router.endpoint("/../../page.html").must_equal filename
+    end
+
+    it "allows safe directory traversal" do
+      filename = File.join(@sitedir, "index.html")
+      @router.endpoint("/dir1/../").must_equal filename
+    end
+
+    it "returns :not_found for unsafe directory traversal 1" do
+      filename = File.join(@sitedir, "/../_site/page.html")
+      assert File.exist?(filename)
+
+      @router.endpoint("/../_site/page.html").must_equal :not_found
+    end
+
+    it "returns :not_found for unsafe directory traversal 2" do
+      @router.endpoint("/%2E%2E/_site/").must_equal :not_found
+    end
+
+    it "returns :not_found for unsafe directory traversal 3" do
+      @router.endpoint("/dir1/../dir1/../../_site/").must_equal :not_found
+    end
+  end
+
+
   describe "when asked for #custom_404_body" do
 
     describe "when 404.html does not exist" do

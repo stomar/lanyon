@@ -1,3 +1,6 @@
+require "rack/utils"
+
+
 module Lanyon
 
   # Router class for Lanyon applications.
@@ -51,7 +54,7 @@ module Lanyon
         normalized = path
       end
 
-      normalized
+      Rack::Utils.clean_path_info(normalized)
     end
   end
 end
