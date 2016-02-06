@@ -47,14 +47,12 @@ module Lanyon
       !fullpath.end_with?("/") && FileTest.file?(fullpath + "/index.html")
     end
 
-    def normalize_path_info(path)
-      if path.end_with?("/")
-        normalized = path + "index.html"
-      else
-        normalized = path
-      end
+    def normalize_path_info(path_info)
+      path = path_info.dup
 
-      Rack::Utils.clean_path_info(normalized)
+      path << "index.html"  if path.end_with?("/")
+
+      Rack::Utils.clean_path_info(path)
     end
   end
 end
