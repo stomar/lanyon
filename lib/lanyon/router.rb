@@ -1,4 +1,5 @@
 require "rack/utils"
+require "uri"
 
 
 module Lanyon
@@ -47,8 +48,12 @@ module Lanyon
       !fullpath.end_with?("/") && FileTest.file?(fullpath + "/index.html")
     end
 
-    def normalize_path_info(path_info)
-      path = path_info.dup
+    def unescape_path(path)  # :nodoc:
+      URI::Parser.new.unescape(path)
+    end
+
+    def normalize_path_info(path_info)  # :nodoc:
+      path = unescape_path(path_info)
 
       path << "index.html"  if path.end_with?("/")
 

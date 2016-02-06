@@ -275,13 +275,11 @@ describe "when handling requests" do
   describe "when URL contains special characters" do
 
     it "returns status 200 for URL with escapes" do
-      skip
       @response = @request.get("%2F2015%2F11%2F05%2Fhello-world.html")
       @response.status.must_equal 200
     end
 
     it "returns status 200 for resource name with blank" do
-      skip
       @response = @request.get("with%20blank.html")
       @response.status.must_equal 200
     end
