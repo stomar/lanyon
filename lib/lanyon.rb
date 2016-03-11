@@ -54,6 +54,16 @@ module Lanyon
     end
   end
 
+  # Builds the Jekyll site.
+  #
+  # Accepts the same options as ::application,
+  # except for the +:skip_build+ option which is ignored.
+  def self.build(options = {})
+    config = jekyll_config(options)
+
+    process(config)
+  end
+
   # @private
   def self.default_options  # :nodoc:
     { :skip_build => false }

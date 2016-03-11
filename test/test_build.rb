@@ -41,4 +41,14 @@ describe "when creating a Lanyon application" do
     file_must_exist(@no_page)
     file_wont_exist(@page)
   end
+
+  it "does always build the site with ::build" do
+    options = {:skip_build => true}.merge(@dir_options)
+    silence_output do
+      Lanyon.build(options)
+    end
+
+    file_must_exist(@page)
+    file_wont_exist(@no_page)
+  end
 end
