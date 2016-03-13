@@ -43,7 +43,6 @@ module Lanyon
     def response(filename)  # :nodoc:
       response = Rack::Response.new(File.binread(filename))
       response["Content-Type"]  = media_type(filename)
-      response["Last-Modified"] = modification_time(filename)
 
       response.finish
     end
@@ -59,10 +58,6 @@ module Lanyon
       extension = ::File.extname(filename)
 
       Rack::Mime.mime_type(extension)
-    end
-
-    def modification_time(filename)  # :nodoc:
-      File.mtime(filename).httpdate
     end
 
     def html_wrap(title, content)  # :nodoc:

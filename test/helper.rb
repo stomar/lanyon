@@ -2,7 +2,6 @@ require "minitest/autorun"
 require "fileutils"
 require "stringio"
 require "rack/mock"
-require "time"
 
 require "lanyon"
 

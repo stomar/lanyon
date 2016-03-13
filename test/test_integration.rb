@@ -45,9 +45,8 @@ describe "when handling requests" do
       @response.headers["Content-Type"].must_equal "text/html"
     end
 
-    it "returns correct Last-Modified header" do
-      mtime = File.mtime(@destdir + "/index.html")
-      @response.headers["Last-Modified"].must_equal mtime.httpdate
+    it "returns an ETag header" do
+      @response.headers["ETag"].wont_be_nil
     end
 
     it "returns correct body" do
@@ -291,30 +290,33 @@ describe "when handling requests" do
   end
 
 
-  describe "when handling If-Modified-Since requests" do
+  describe "when handling caching with ETag" do
 
     before do
-      modify_time  = @request.get("/").headers["Last-Modified"]
-      earlier_time = (Time.parse(modify_time) - 3600).httpdate
-      @modify_time_header  = { "HTTP_IF_MODIFIED_SINCE" => modify_time }
-      @earlier_time_header = { "HTTP_IF_MODIFIED_SINCE" => earlier_time }
+      etag  = @request.get("/").headers["ETag"]
+      other = @request.get("/no-extension").headers["ETag"]
+      assert  etag.start_with?("W/")
+      assert other.start_with?("W/")
+
+      @correct_etag = { "HTTP_IF_NONE_MATCH" => etag }
+      @other_etag   = { "HTTP_IF_NONE_MATCH" => other }
     end
 
     it "returns correct status code for unchanged '/'" do
-      @request.get("/", @modify_time_header).status.must_equal 304
+      @request.get("/", @correct_etag).status.must_equal 304
     end
 
     it "does not return a Content-Length header for unchanged '/'" do
-      response = @request.get("/", @modify_time_header)
+      response = @request.get("/", @correct_etag)
       response.original_headers["Content-Length"].must_be_nil
     end
 
-    it "returns correct status code for updated '/'" do
-      @request.get("/", @earlier_time_header).status.must_equal 200
+    it "returns correct status code for changed '/'" do
+      @request.get("/", @other_etag).status.must_equal 200
     end
 
     it "returns correct status code for 404" do
-      @request.get("/not/a/page", @earlier_time_header).status.must_equal 404
+      @request.get("/not/a/page", @other_etag).status.must_equal 404
     end
   end
 
