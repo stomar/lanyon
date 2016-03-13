@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.files = %w[
       README.md
       LICENSE
+      History.md
       lanyon.gemspec
       Gemfile
       Rakefile
@@ -41,6 +42,6 @@ Gem::Specification.new do |s|
     Dir.glob("test/**/*") +
     Dir.glob("demo/**/*").reject {|f| f =~ %r(\Ademo/_site/) }
 
-  s.extra_rdoc_files = %w[README.md LICENSE]
+  s.extra_rdoc_files = %w[README.md LICENSE History.md]
   s.rdoc_options = ["--charset=UTF-8", "--main=README.md"]
 end
