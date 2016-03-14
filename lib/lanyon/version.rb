@@ -1,4 +1,4 @@
 module Lanyon
-  VERSION  = '0.2.3'
-  DATE     = '2016-02-06'
+  VERSION  = "0.3.0"
+  DATE     = "2016-03-14"
 end
