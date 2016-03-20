@@ -1,6 +1,10 @@
 Release History
 ===============
 
+## 0.3.1
+
+* Do not set a Cache-Control header
+
 ## 0.3.0
 
 * Use ETag instead of Last-Modified for caching
