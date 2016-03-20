@@ -49,7 +49,7 @@ module Lanyon
     Rack::Builder.new do
       use Rack::Head
       use Rack::ConditionalGet
-      use Rack::ETag
+      use Rack::ETag, nil, nil
 
       run Application.new(router)
     end
