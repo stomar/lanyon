@@ -91,6 +91,7 @@ module Lanyon
   def self.process(config)  # :nodoc:
     site = ::Jekyll::Site.new(config)
     puts "Generating site: #{site.source} -> #{site.dest}"
+    $stdout.flush
     site.process
   end
 end
