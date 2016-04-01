@@ -1,6 +1,10 @@
 Release History
 ===============
 
+## 0.3.2
+
+* Flush progress output before starting build
+
 ## 0.3.1
 
 * Do not set a Cache-Control header
