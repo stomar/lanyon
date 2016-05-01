@@ -90,8 +90,12 @@ module Lanyon
   # Takes a Jekyll configuration hash as argument.
   def self.process(config)  # :nodoc:
     site = ::Jekyll::Site.new(config)
-    puts "Generating site: #{site.source} -> #{site.dest}"
+    puts "            Source: #{site.source}"
+    puts "       Destination: #{site.dest}"
+    puts " Generating site..."
     $stdout.flush
     site.process
+    puts "                    done."
+    $stdout.flush
   end
 end

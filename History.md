@@ -1,6 +1,8 @@
 Release History
 ===============
 
+* Use a nicer progress output format
+
 ## 0.3.2
 
 * Flush progress output before starting build
