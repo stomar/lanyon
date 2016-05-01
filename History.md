@@ -1,6 +1,8 @@
 Release History
 ===============
 
+## 0.3.3
+
 * Use a nicer progress output format
 
 ## 0.3.2
