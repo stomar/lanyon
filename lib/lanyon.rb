@@ -8,6 +8,7 @@ require "rack"
 require "lanyon/application"
 require "lanyon/router"
 require "lanyon/version"
+require "lanyon/backports"
 
 
 # Lanyon serves your Jekyll site as a Rack application.

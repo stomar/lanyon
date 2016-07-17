@@ -1,5 +1,4 @@
 require "rack/utils"
-require "uri"
 
 
 module Lanyon
@@ -49,7 +48,7 @@ module Lanyon
     end
 
     def unescape_path(path)  # :nodoc:
-      URI::Parser.new.unescape(path)
+      Rack::Utils.unescape_path(path)
     end
 
     def normalize_path_info(path_info)  # :nodoc:
