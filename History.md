@@ -1,6 +1,12 @@
 Release History
 ===============
 
+## 0.3.4
+
+* Allow Rack 2
+* Use Rack::Utils.unescape_path with Rack 2
+* Update development dependencies
+
 ## 0.3.3
 
 * Use a nicer progress output format
