@@ -17,6 +17,10 @@ describe Lanyon::Router do
       dir-with-index/index.html
       dir-without-index/page.html
       dir1/dir2/dir3/index.html
+      foo
+      foo.html
+      bar.html
+      bar/index.html
     ]
 
     files.each do |path|
@@ -75,6 +79,40 @@ describe Lanyon::Router do
 
     it "returns :not_found for '/path/to/dir' without index" do
       @router.endpoint("/dir-without-index").must_equal :not_found
+    end
+  end
+
+
+  describe "when automatically adding .html extension" do
+
+    it "returns existing path" do
+      filename = File.join(@sitedir, "page.html")
+      @router.endpoint("/page").must_equal filename
+    end
+
+    describe "when both `foo' and `foo.html' exist" do
+
+      it "returns `foo' and not `foo.html' when asked for `foo'" do
+        filename = File.join(@sitedir, "foo")
+        @router.endpoint("/foo").must_equal filename
+      end
+
+      it "can also serve `foo.html'" do
+        filename = File.join(@sitedir, "foo.html")
+        @router.endpoint("/foo.html").must_equal filename
+      end
+    end
+
+    describe "when both `bar.html' and `bar/index.html' exist" do
+
+      it "returns :must_redirect and not `bar.html' when asked for `bar'" do
+        @router.endpoint("/bar").must_equal :must_redirect
+      end
+
+      it "can also serve `bar.html'" do
+        filename = File.join(@sitedir, "bar.html")
+        @router.endpoint("/bar.html").must_equal filename
+      end
     end
   end
 

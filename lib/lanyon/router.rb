@@ -16,9 +16,17 @@ module Lanyon
     # Returns the full file system path of the file corresponding to
     # the given URL +path+, or
     #
-    # - +:not_found+ if no corresponding file exists,
-    # - +:must_redirect+ if the request must be redirected to <tt>path/</tt>.
+    # - +:must_redirect+ if the request must be redirected to +path/+,
+    # - +:not_found+ if no corresponding file exists.
     #
+    # The return value is found as follows:
+    #
+    # 1. a +path/+ with a trailing slash is changed to +path/index.html+,
+    # 2. then, the method checks for an exactly corresponding file,
+    # 3. when +path+ does not exist but +path/index.html+ does,
+    #    a redirect will be indicated,
+    # 4. finally, when no exactly corresponding file or redirect
+    #    can be found, +path.html+ is tried.
     def endpoint(path)
       normalized = normalize_path_info(path)
 
@@ -27,6 +35,8 @@ module Lanyon
                    fullpath
                  elsif needs_redirect_to_dir?(fullpath)
                    :must_redirect
+                 elsif FileTest.file?(fullpath_html = "#{fullpath}.html")
+                   fullpath_html
                  else
                    :not_found
                  end
