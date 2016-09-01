@@ -1,6 +1,10 @@
 Release History
 ===============
 
+## 0.4.0
+
+* Support .html extension stripping
+
 ## 0.3.4
 
 * Allow Rack 2
