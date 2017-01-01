@@ -107,7 +107,7 @@ Lanyon was inspired by [rack-jekyll][rack-jekyll] and written as a replacement.
 
 ## License
 
-Copyright &copy; 2015-2016 Marcus Stollsteimer
+Copyright &copy; 2015-2017 Marcus Stollsteimer
 
 Lanyon is licensed under the [MIT License][MIT].
 See also the included `LICENSE` file for more information.
