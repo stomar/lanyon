@@ -25,6 +25,7 @@ end
 desc "Remove generated files"
 task :clean do
   FileUtils.rm_rf("demo/_site")
+  FileUtils.rm_rf("demo/.jekyll-cache")
   FileUtils.rm(Dir.glob("*.gem"))
 end
 
