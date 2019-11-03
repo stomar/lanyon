@@ -25,6 +25,7 @@ describe "when handling requests" do
 
   after do
     teardown_tempdir
+    teardown_cachedir
   end
 
 

@@ -23,6 +23,7 @@ describe "when creating a Lanyon application" do
 
   after do
     teardown_tempdir
+    teardown_cachedir
   end
 
   it "builds the site by default, removing old content" do

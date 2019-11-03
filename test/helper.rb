@@ -9,6 +9,10 @@ require "lanyon"
 
 
 TEST_DIR = File.expand_path("..", __FILE__)
+
+SOURCE_DIR = File.join(TEST_DIR, "source")
+CACHE_DIR = File.join(SOURCE_DIR, ".jekyll-cache")
+
 TEMP_DIR = File.join(TEST_DIR, "tmp")
 
 
@@ -26,8 +30,12 @@ def chdir_tempdir
   Dir.chdir(TEMP_DIR)
 end
 
+def teardown_cachedir
+  FileUtils.rm_rf(CACHE_DIR)  if File.exist?(CACHE_DIR)
+end
+
 def sourcedir
-  File.join(TEST_DIR, "source")
+  SOURCE_DIR
 end
 
 
