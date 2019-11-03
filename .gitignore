@@ -1,3 +1,4 @@
 *.gem
 Gemfile.lock
-demo/_site
+demo/.jekyll-cache/
+demo/_site/
