@@ -1,6 +1,14 @@
 Release History
 ===============
 
+## 0.4.1
+
+* Drop pessimistic constraint on Jekyll version
+* Remove Jekyll cache directory after tests
+* Let "clean" task remove Jekyll cache directory
+* Add Jekyll cache directory to .gitignore
+* Add magic comments for frozen string literals
+
 ## 0.4.0
 
 * Support .html extension stripping
