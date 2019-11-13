@@ -32,11 +32,11 @@ to a Rack application is very simple.
 You can find an example site in the `demo` directory.
 
 Note that Lanyon does not watch for site changes.
-Auto-regeneration similar to Jekyll's `serve` command is
+Auto-regeneration similar to Jekyll's `serve` command is 
 not supported, and there are no plans to add this feature.
 
 Lanyon applications can be served with WEBrick, Thin, Unicorn and many
-other web servers, and they can be deployed to services like e.g. Heroku.
+other web servers. They can also be deployed to services such as Heroku.
 
 ## Installation
 
@@ -93,7 +93,7 @@ Lanyon maps URLs to corresponding files as follows:
     the response will be a redirect to `path/`,
  4. when neither 2. nor 3. apply, +path.html+ is tried.
 
-To avoid confusion, it's probably a good idea to have only one
+To avoid confusion, it is a good idea to have only one
 of `resource`, `resource/index.html`, and `resource.html` present
 as file in your site.
 
