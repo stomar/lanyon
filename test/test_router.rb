@@ -43,44 +43,44 @@ describe Lanyon::Router do
 
     it "returns path for '/'" do
       filename = File.join(@sitedir, "index.html")
-      @router.endpoint("/").must_equal filename
+      _(@router.endpoint("/")).must_equal filename
     end
 
     it "returns existing path" do
       filename = File.join(@sitedir, "page.html")
-      @router.endpoint("/page.html").must_equal filename
+      _(@router.endpoint("/page.html")).must_equal filename
     end
 
     it "returns existing path for resource without extension" do
       filename = File.join(@sitedir, "README")
-      @router.endpoint("/README").must_equal filename
+      _(@router.endpoint("/README")).must_equal filename
     end
 
     it "returns :not_found for non-existent path" do
-      @router.endpoint("/not-a-page.html").must_equal :not_found
+      _(@router.endpoint("/not-a-page.html")).must_equal :not_found
     end
 
     it "returns :not_found for partially matching paths" do
-      @router.endpoint("/dir1/dir2/").must_equal :not_found
-      @router.endpoint("/dir2/dir3").must_equal :not_found
-      @router.endpoint("ir1/di").must_equal :not_found
+      _(@router.endpoint("/dir1/dir2/")).must_equal :not_found
+      _(@router.endpoint("/dir2/dir3")).must_equal :not_found
+      _(@router.endpoint("ir1/di")).must_equal :not_found
     end
 
     it "returns path for '/path/to/dir/' with index" do
       filename = File.join(@sitedir, "dir-with-index/index.html")
-      @router.endpoint("/dir-with-index/").must_equal filename
+      _(@router.endpoint("/dir-with-index/")).must_equal filename
     end
 
     it "returns :must_redirect for '/path/to/dir' with index" do
-      @router.endpoint("/dir-with-index").must_equal :must_redirect
+      _(@router.endpoint("/dir-with-index")).must_equal :must_redirect
     end
 
     it "returns :not_found for '/path/to/dir/' without index" do
-      @router.endpoint("/dir-without-index/").must_equal :not_found
+      _(@router.endpoint("/dir-without-index/")).must_equal :not_found
     end
 
     it "returns :not_found for '/path/to/dir' without index" do
-      @router.endpoint("/dir-without-index").must_equal :not_found
+      _(@router.endpoint("/dir-without-index")).must_equal :not_found
     end
   end
 
@@ -89,31 +89,31 @@ describe Lanyon::Router do
 
     it "returns existing path" do
       filename = File.join(@sitedir, "page.html")
-      @router.endpoint("/page").must_equal filename
+      _(@router.endpoint("/page")).must_equal filename
     end
 
     describe "when both `foo' and `foo.html' exist" do
 
       it "returns `foo' and not `foo.html' when asked for `foo'" do
         filename = File.join(@sitedir, "foo")
-        @router.endpoint("/foo").must_equal filename
+        _(@router.endpoint("/foo")).must_equal filename
       end
 
       it "can also serve `foo.html'" do
         filename = File.join(@sitedir, "foo.html")
-        @router.endpoint("/foo.html").must_equal filename
+        _(@router.endpoint("/foo.html")).must_equal filename
       end
     end
 
     describe "when both `bar.html' and `bar/index.html' exist" do
 
       it "returns :must_redirect and not `bar.html' when asked for `bar'" do
-        @router.endpoint("/bar").must_equal :must_redirect
+        _(@router.endpoint("/bar")).must_equal :must_redirect
       end
 
       it "can also serve `bar.html'" do
         filename = File.join(@sitedir, "bar.html")
-        @router.endpoint("/bar.html").must_equal filename
+        _(@router.endpoint("/bar.html")).must_equal filename
       end
     end
   end
@@ -123,27 +123,27 @@ describe Lanyon::Router do
 
     it "discards leading '..' for existing path" do
       filename = File.join(@sitedir, "page.html")
-      @router.endpoint("/../../page.html").must_equal filename
+      _(@router.endpoint("/../../page.html")).must_equal filename
     end
 
     it "allows safe directory traversal" do
       filename = File.join(@sitedir, "index.html")
-      @router.endpoint("/dir1/../").must_equal filename
+      _(@router.endpoint("/dir1/../")).must_equal filename
     end
 
     it "returns :not_found for unsafe directory traversal 1" do
       filename = File.join(@sitedir, "/../_site/page.html")
       assert File.exist?(filename)
 
-      @router.endpoint("/../_site/page.html").must_equal :not_found
+      _(@router.endpoint("/../_site/page.html")).must_equal :not_found
     end
 
     it "returns :not_found for unsafe directory traversal 2" do
-      @router.endpoint("/%2E%2E/_site/").must_equal :not_found
+      _(@router.endpoint("/%2E%2E/_site/")).must_equal :not_found
     end
 
     it "returns :not_found for unsafe directory traversal 3" do
-      @router.endpoint("/dir1/../dir1/../../_site/").must_equal :not_found
+      _(@router.endpoint("/dir1/../dir1/../../_site/")).must_equal :not_found
     end
   end
 
@@ -153,7 +153,7 @@ describe Lanyon::Router do
     describe "when 404.html does not exist" do
 
       it "returns nil" do
-        @router.custom_404_body.must_be_nil
+        _(@router.custom_404_body).must_be_nil
       end
     end
 
@@ -169,7 +169,7 @@ describe Lanyon::Router do
       end
 
       it "returns correct body" do
-        @router.custom_404_body.must_equal "Custom 404"
+        _(@router.custom_404_body).must_equal "Custom 404"
       end
     end
   end
@@ -179,14 +179,14 @@ describe Lanyon::Router do
 
     it "strips trailing slash from root" do
       router = Lanyon::Router.new(@sitedir + "/")
-      router.root.must_equal @sitedir
+      _(router.root).must_equal @sitedir
     end
 
     it "does not append a trailing slash to root" do
       assert !@sitedir.end_with?("/")
 
       router = Lanyon::Router.new(@sitedir)
-      router.root.must_equal @sitedir
+      _(router.root).must_equal @sitedir
     end
   end
 end
