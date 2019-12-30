@@ -110,9 +110,9 @@ module Lanyon
 
       body = redirect_body(location)
       headers = {
-        "Location"      => location,
+        "Location" => location,
         "Cache-Control" => "max-age=#{cache_time}, must-revalidate",
-        "Expires"       => (Time.now + cache_time).httpdate
+        "Expires" => (Time.now + cache_time).httpdate
       }
 
       html_response(body, 301, headers)
