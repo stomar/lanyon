@@ -8,7 +8,7 @@ require "rack/mock"
 require "lanyon"
 
 
-TEST_DIR = File.expand_path("..", __FILE__)
+TEST_DIR = File.expand_path(__dir__)
 
 SOURCE_DIR = File.join(TEST_DIR, "source")
 CACHE_DIR = File.join(SOURCE_DIR, ".jekyll-cache")
