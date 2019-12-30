@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.summary = "Lanyon serves your Jekyll site as a Rack application."
   s.description =
-    "Lanyon is a good friend of Jekyll, the static site generator, " +
+    "Lanyon is a good friend of Jekyll, the static site generator, " \
     "and transforms your website into a Rack application."
 
   s.authors = ["Marcus Stollsteimer"]
