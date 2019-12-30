@@ -44,7 +44,7 @@ module Lanyon
 
     def response(filename)  # :nodoc:
       response = Rack::Response.new(File.binread(filename))
-      response["Content-Type"]  = media_type(filename)
+      response["Content-Type"] = media_type(filename)
 
       response.finish
     end
