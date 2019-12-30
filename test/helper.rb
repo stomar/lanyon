@@ -38,7 +38,6 @@ def sourcedir
   SOURCE_DIR
 end
 
-
 def silence_output
   original_stderr, original_stdout = $stderr, $stdout
   $stderr, $stdout = StringIO.new, StringIO.new
@@ -47,7 +46,6 @@ def silence_output
 ensure
   $stderr, $stdout = original_stderr, original_stdout
 end
-
 
 def file_must_exist(filename)
   assert File.exist?(filename),
