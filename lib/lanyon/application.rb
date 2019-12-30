@@ -63,7 +63,7 @@ module Lanyon
     end
 
     def html_wrap(title, content)  # :nodoc:
-      <<-document.gsub(/^ {6}/, "")
+      <<-DOCUMENT.gsub(/^ {6}/, "")
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -73,7 +73,7 @@ module Lanyon
         #{content}
       </body>
       </html>
-      document
+      DOCUMENT
     end
 
     def default_404_body  # :nodoc:
