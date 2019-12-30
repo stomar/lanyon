@@ -97,7 +97,7 @@ module Lanyon
     end
 
     def redirect_body(to_path)  # :nodoc:
-      message = %Q{<p>Redirecting to <a href="#{to_path}">#{to_path}</a>.</p>}
+      message = %Q(<p>Redirecting to <a href="#{to_path}">#{to_path}</a>.</p>)
 
       html_wrap("Redirection", message)
     end
