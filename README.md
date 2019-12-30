@@ -56,7 +56,7 @@ or as Lanyon initialization options in `config.ru`.
 Example:
 
 ``` ruby
-run Lanyon.application(:destination => "mysite")
+run Lanyon.application(destination: "mysite")
 ```
 
 This will set a custom destination path, overriding the default (`_site`)
@@ -70,7 +70,7 @@ Additional Lanyon initialization options:
                     (default: false)
 
 Note that on read-only filesystems a site build will fail,
-so you must set `:skip_build => true` in these cases.
+so you must set `skip_build: true` in these cases.
 
 ### Custum 404 Page
 

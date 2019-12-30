@@ -11,7 +11,7 @@ describe "when creating a Lanyon application" do
 
     destdir = File.join(tempdir, "_site")
 
-    @dir_options = { :source => sourcedir, :destination => destdir }
+    @dir_options = { source: sourcedir, destination: destdir }
     @page = File.join(destdir, "index.html")
     @no_page = File.join(destdir, "not_a_page.html")
 
@@ -36,7 +36,7 @@ describe "when creating a Lanyon application" do
   end
 
   it "does not build the site when :skip_build option is set" do
-    options = {:skip_build => true}.merge(@dir_options)
+    options = { skip_build: true }.merge(@dir_options)
     silence_output do
       Lanyon.application(options)
     end
@@ -46,7 +46,7 @@ describe "when creating a Lanyon application" do
   end
 
   it "does always build the site with ::build" do
-    options = {:skip_build => true}.merge(@dir_options)
+    options = { skip_build: true }.merge(@dir_options)
     silence_output do
       Lanyon.build(options)
     end

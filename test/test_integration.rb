@@ -19,7 +19,7 @@ describe "when handling requests" do
 
     @destdir = File.join(tempdir, "_site")
 
-    app = get_app(:source => sourcedir, :destination => @destdir)
+    app = get_app(source: sourcedir, destination: @destdir)
     @request = Rack::MockRequest.new(app)
   end
 
@@ -88,7 +88,7 @@ describe "when handling requests" do
       @custom_404 = File.join(sourcedir, "404.html")
       File.open(@custom_404, "w") {|f| f.print "Custom 404" }
 
-      app = get_app(:source => sourcedir, :destination => @destdir)
+      app = get_app(source: sourcedir, destination: @destdir)
       request = Rack::MockRequest.new(app)
       @response = request.get("/not/a/page")
     end

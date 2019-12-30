@@ -61,7 +61,7 @@ describe "when configuring site" do
     end
 
     it "loads the configuration from file" do
-      config = get_jekyll_config(:config => "_my_config.yml")
+      config = get_jekyll_config(config: "_my_config.yml")
       _(config).must_include "config_file_opt"
       _(config["config_file_opt"]).must_equal "ok"
     end
@@ -70,18 +70,18 @@ describe "when configuring site" do
   describe "when initialization options are given" do
 
     it "has the initialization options" do
-      config = get_jekyll_config(:init_opt => "ok")
+      config = get_jekyll_config(init_opt: "ok")
       _(config).must_include "init_opt"
       _(config["init_opt"]).must_equal "ok"
     end
 
     it "has the correct destination" do
-      config = get_jekyll_config(:destination => "/project/_site")
+      config = get_jekyll_config(destination: "/project/_site")
       _(config["destination"]).must_equal "/project/_site"
     end
 
     it "does not pass :skip_build on to Jekyll" do
-      config = get_jekyll_config(:skip_build => "ok")
+      config = get_jekyll_config(skip_build: "ok")
       _(config).wont_include "skip_build"
     end
   end
@@ -101,8 +101,7 @@ describe "when configuring site" do
     end
 
     it "has all options and initialization options override file options" do
-      config = get_jekyll_config(:init_opt   => "ok",
-                                 :common_opt => "from init")
+      config = get_jekyll_config(init_opt: "ok", common_opt: "from init")
       _(config).must_include "init_opt"
       _(config).must_include "config_file_opt"
       _(config).must_include "common_opt"
@@ -110,7 +109,7 @@ describe "when configuring site" do
     end
 
     it "has the correct destination" do
-      config = get_jekyll_config(:destination => "/project/_site_from_init")
+      config = get_jekyll_config(destination: "/project/_site_from_init")
       _(config["destination"]).must_equal "/project/_site_from_init"
     end
   end

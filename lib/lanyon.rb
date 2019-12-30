@@ -70,7 +70,7 @@ module Lanyon
 
   # @private
   def self.default_options  # :nodoc:
-    { :skip_build => false }
+    { skip_build: false }
   end
 
   # @private
