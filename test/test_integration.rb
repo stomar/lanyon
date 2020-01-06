@@ -183,8 +183,8 @@ describe "when handling requests" do
       filename = File.join(@destdir, "/../_site/index.html")
       assert File.exist?(filename)
 
-      @response = @request.get("/../_site/index.html")
-      _(@response.status).must_equal 404
+      response = @request.get("/../_site/index.html")
+      _(response.status).must_equal 404
     end
   end
 
@@ -276,18 +276,18 @@ describe "when handling requests" do
   describe "when URL contains special characters" do
 
     it "returns status 200 for URL with escapes" do
-      @response = @request.get("%2F2015%2F11%2F05%2Fhello-world.html")
-      _(@response.status).must_equal 200
+      response = @request.get("%2F2015%2F11%2F05%2Fhello-world.html")
+      _(response.status).must_equal 200
     end
 
     it "returns status 200 for resource name with blank" do
-      @response = @request.get("with%20blank.html")
-      _(@response.status).must_equal 200
+      response = @request.get("with%20blank.html")
+      _(response.status).must_equal 200
     end
 
     it "returns status 200 for resource name with plus" do
-      @response = @request.get("with+plus.html")
-      _(@response.status).must_equal 200
+      response = @request.get("with+plus.html")
+      _(response.status).must_equal 200
     end
   end
 
