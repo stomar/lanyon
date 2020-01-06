@@ -200,7 +200,8 @@ describe "when handling requests" do
     end
 
     it "returns correct body for 'directory/' with index.html" do
-      _(@request.get("/dir-with-index/").body).must_match %r{<p>Index of dir-with-index/</p>}
+      response_body = @request.get("/dir-with-index/").body
+      _(response_body).must_match %r{<p>Index of dir-with-index/</p>}
     end
 
     it "returns status 404 for 'directory' without index.html" do
@@ -345,7 +346,8 @@ describe "when handling requests" do
     end
 
     it "returns correct Allow header" do
-      _(@request.options("/").original_headers["Allow"]).must_equal "GET,HEAD,OPTIONS"
+      response_allow_header = @request.options("/").original_headers["Allow"]
+      _(response_allow_header).must_equal "GET,HEAD,OPTIONS"
     end
 
     it "does not return a body" do
