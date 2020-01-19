@@ -1,6 +1,11 @@
 Release History
 ===============
 
+## 0.4.2
+
+* Avoid deprecation warnings for minitest expectations
+* Improve code style
+
 ## 0.4.1
 
 * Drop pessimistic constraint on Jekyll version
