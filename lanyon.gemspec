@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
     ] +
     Dir.glob("lib/**/*") +
     Dir.glob("test/**/*") +
-    Dir.glob("demo/**/*").reject {|f| f =~ %r{\Ademo/_site/} }
+    Dir.glob("demo/**/*").reject {|f| f.start_with?("demo/_site/") }
 
   s.extra_rdoc_files = %w[README.md LICENSE History.md]
   s.rdoc_options = ["--charset=UTF-8", "--main=README.md"]
