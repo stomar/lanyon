@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rack", ">= 1.6", "< 3.0"
 
   s.add_development_dependency "minitest", "~> 5.8"
-  s.add_development_dependency "rake", "~> 11.2"
+  s.add_development_dependency "rake", "~> 13.0"
 
   s.require_paths = ["lib"]
 
