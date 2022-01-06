@@ -1,6 +1,12 @@
 Release History
 ===============
 
+## 0.4.3
+
+* Use Rack::ContentLength middleware to fix missing
+  Content-Length headers for rack 2.1.0 and later
+* Update development dependencies
+
 ## 0.4.2
 
 * Avoid deprecation warnings for minitest expectations
