@@ -361,7 +361,7 @@ describe "when handling requests" do
   end
 
 
-  describe "when handling POST, PUT, DELETE, and other requests" do
+  describe "when handling POST, PUT, DELETE, and other not allowed requests" do
 
     it "returns status 405" do
       _(@request.post("/").status).must_equal 405
@@ -373,6 +373,10 @@ describe "when handling requests" do
     it "returns correct body" do
       expected = %r{<!DOCTYPE html>.*<p>405: Method Not Allowed</p>}m
       _(@request.post("/").body).must_match expected
+    end
+
+    it "returns correct Content-Length header" do
+      _(@request.post("/").original_headers["Content-Length"]).must_equal "151"
     end
   end
 end
