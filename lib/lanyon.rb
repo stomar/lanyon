@@ -51,6 +51,7 @@ module Lanyon
 
     Rack::Builder.new do
       use Rack::Head
+      use Rack::ContentLength
       use Rack::ConditionalGet
       use Rack::ETag, nil, nil
 
