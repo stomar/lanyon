@@ -62,7 +62,7 @@ describe "when handling requests" do
       @response = @request.get("/not/a/page")
     end
 
-    it "returns status 200" do
+    it "returns status 404" do
       _(@response.status).must_equal 404
     end
 
