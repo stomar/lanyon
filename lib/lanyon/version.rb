@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 module Lanyon
-  VERSION  = "0.4.2"
-  DATE     = "2020-01-19"
+  VERSION  = "0.4.3"
+  DATE     = "2022-01-06"
 end
