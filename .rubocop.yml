@@ -1,0 +1,89 @@
+# Enable all new cops.
+AllCops:
+  NewCops: enable
+
+# Allow setting of date in gemspec.
+Gemspec/DateAssignment:
+  Enabled: false
+
+# Do not require multi-factor authentication for RubyGems.
+Gemspec/RequireMFA:
+  Enabled: false
+
+# Allow extra blank lines.
+Layout/EmptyLines:
+  Enabled: false
+
+# Allow extra empty line at block body beginning.
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# Allow extra empty line at class body beginning.
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: beginning_only
+
+# Allow extra empty lines around module body.
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+# Allow extra spacing.
+Layout/ExtraSpacing:
+  Enabled: false
+
+# No space before block parameters.
+Layout/SpaceInsideBlockBraces:
+  SpaceBeforeBlockParameters: false
+
+# Disable metrics.
+Metrics:
+  Enabled: false
+
+# Use %Q() instead of %() for string percent literals.
+Style/BarePercentLiterals:
+  EnforcedStyle: percent_q
+
+# Allow missing top-level documentation comment for backports.rb file.
+Style/Documentation:
+  Exclude:
+    - lib/lanyon/backports.rb
+
+# Do not enforce a specific string formatting method.
+Style/FormatString:
+  Enabled: false
+
+# Allow unnamed format string tokens.
+Style/FormatStringToken:
+  Enabled: false
+
+# Allow missing frozen string literal comment in some files.
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - Gemfile
+    - demo/config.ru
+
+# Use Ruby 1.9 hash syntax.
+# Do not allow the hash value shorthand syntax of Ruby 3.1.
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+  EnforcedShorthandSyntax: never
+
+# Allow parallel assignment.
+Style/ParallelAssignment:
+  Enabled: false
+
+# Allow %r{} for regular expressions in test files.
+# (To avoid ambiguous regexp literal warnings.)
+Style/RegexpLiteral:
+  Exclude:
+    - "test/test_*.rb"
+
+# Use double quotes for string literals.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+
+##### Settings for older Ruby versions #####
+
+# For Ruby <= 2.5.
+Gemspec/RequiredRubyVersion:
+  Enabled: false
