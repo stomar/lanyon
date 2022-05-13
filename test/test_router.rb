@@ -178,7 +178,7 @@ describe Lanyon::Router do
   describe "when initialized" do
 
     it "strips trailing slash from root" do
-      router = Lanyon::Router.new(@sitedir + "/")
+      router = Lanyon::Router.new("#{@sitedir}/")
       _(router.root).must_equal @sitedir
     end
 

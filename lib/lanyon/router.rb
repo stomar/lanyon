@@ -54,7 +54,7 @@ module Lanyon
     private
 
     def needs_redirect_to_dir?(fullpath)  # :nodoc:
-      !fullpath.end_with?("/") && FileTest.file?(fullpath + "/index.html")
+      !fullpath.end_with?("/") && FileTest.file?("#{fullpath}/index.html")
     end
 
     def unescape_path(path)  # :nodoc:
