@@ -26,9 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency "jekyll", ">= 2.0"
   s.add_dependency "rack", ">= 1.6", "< 3.0"
 
-  s.add_development_dependency "minitest", "~> 5.8"
-  s.add_development_dependency "rake", "~> 13.0"
-
   s.require_paths = ["lib"]
 
   s.files =
