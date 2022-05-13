@@ -31,19 +31,17 @@ module Lanyon
     #    can be found, +path.html+ is tried.
     def endpoint(path)
       normalized = normalize_path_info(path)
-
       fullpath = File.join(@root, normalized)
-      endpoint = if FileTest.file?(fullpath)
-                   fullpath
-                 elsif needs_redirect_to_dir?(fullpath)
-                   :must_redirect
-                 elsif FileTest.file?(fullpath_html = "#{fullpath}.html")
-                   fullpath_html
-                 else
-                   :not_found
-                 end
 
-      endpoint
+      if FileTest.file?(fullpath)
+        fullpath
+      elsif needs_redirect_to_dir?(fullpath)
+        :must_redirect
+      elsif FileTest.file?(fullpath_html = "#{fullpath}.html")
+        fullpath_html
+      else
+        :not_found
+      end
     end
 
     # Returns the body of the custom 404 page or +nil+ if none exists.
