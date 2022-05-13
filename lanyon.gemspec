@@ -29,7 +29,8 @@ Gem::Specification.new do |s|
 
   s.require_paths = ["lib"]
 
-  s.files = %w[
+  s.files =
+    %w[
       README.md
       LICENSE
       History.md
