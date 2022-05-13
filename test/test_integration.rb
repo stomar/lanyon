@@ -84,8 +84,8 @@ describe "when handling requests" do
   describe "when asked for a nonexistent path and a custom 404 exists" do
 
     before do
-      @custom_404 = File.join(sourcedir, "404.html")
-      File.open(@custom_404, "w") {|f| f.print "Custom 404" }
+      @custom_404_file = File.join(sourcedir, "404.html")
+      File.open(@custom_404_file, "w") {|f| f.print "Custom 404" }
 
       app = get_app(source: sourcedir, destination: @destdir)
       request = Rack::MockRequest.new(app)
@@ -93,7 +93,7 @@ describe "when handling requests" do
     end
 
     after do
-      FileUtils.rm(@custom_404)
+      FileUtils.rm(@custom_404_file)
     end
 
     it "returns correct Content-Length header" do

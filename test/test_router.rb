@@ -160,12 +160,12 @@ describe Lanyon::Router do
     describe "when 404.html does exist" do
 
       before do
-        @custom_404 = File.join(@sitedir, "404.html")
-        File.open(@custom_404, "w") {|f| f.print "Custom 404" }
+        @custom_404_file = File.join(@sitedir, "404.html")
+        File.open(@custom_404_file, "w") {|f| f.print "Custom 404" }
       end
 
       after do
-        FileUtils.rm(@custom_404)
+        FileUtils.rm(@custom_404_file)
       end
 
       it "returns correct body" do
