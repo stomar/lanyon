@@ -128,6 +128,6 @@ See also the included `LICENSE` file for more information.
 
 [ruby]: http://www.ruby-lang.org/
 [jekyll]: http://jekyllrb.com/
-[rack]: http://rack.github.io/
+[rack]: https://github.com/rack/rack
 [rack-jekyll]: https://github.com/adaoraul/rack-jekyll
 [MIT]: http://www.opensource.org/licenses/MIT
