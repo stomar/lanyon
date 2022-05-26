@@ -1,6 +1,8 @@
 Lanyon
 ======
 
+![CI](https://github.com/stomar/lanyon/actions/workflows/ci.yml/badge.svg)
+
 Lanyon serves your Jekyll site as a Rack application.
 
 Lanyon is a good friend of [Jekyll][jekyll], the static site generator,
