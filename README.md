@@ -12,7 +12,26 @@ Assuming you already have a Jekyll project that can be built and
 served using the `jekyll` command line tool, then converting it
 to a Rack application is very simple.
 
- 1. Add a `config.ru` file in your project's root directory,
+ 1. Add the Lanyon gem and one of the web servers supported by Rack
+    (e.g. Puma) to your project's `Gemfile`:
+
+    ~~~ ruby
+    gem "lanyon"
+    gem "puma"
+    ~~~
+
+    Then install the gems by running the following in the terminal:
+
+    ~~~ sh
+    bundle install
+    ~~~
+
+    Note that for Ruby 3.0 or newer, you _must_ explicitly add a
+    web server gem.
+    In older Ruby versions, WEBrick is already included and used as fallback.
+    For possible other choices see [Rack's README][rack].
+
+ 2. Add a `config.ru` file in your project's root directory,
     with the following content:
 
     ``` ruby
@@ -23,10 +42,10 @@ to a Rack application is very simple.
 
     You can specify additional Rack middleware in this file.
 
- 2. At the command prompt, build the site and start the web server with
+ 3. Build the site and start the web server with the following command:
 
     ``` sh
-    rackup config.ru
+    bundle exec rackup config.ru
     ```
 
 You can find an example site in the `demo` directory.
@@ -35,16 +54,8 @@ Note that Lanyon does not watch for site changes.
 Auto-regeneration similar to Jekyll's `serve` command is
 not supported, and there are no plans to add this feature.
 
-Lanyon applications can be served with WEBrick, Thin, Unicorn and many
+Lanyon applications can be served with WEBrick, Puma, Thin, and many
 other web servers, and they can be deployed to services like e.g. Heroku.
-
-## Installation
-
-You can install the Lanyon gem from RubyGems.org with
-
-``` sh
-gem install lanyon
-```
 
 ## Configuration
 
