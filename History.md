@@ -1,6 +1,14 @@
 Release History
 ===============
 
+## 0.4.4
+
+* Improve code style
+* Update README
+* Add CI workflow
+* Move development dependencies from gemspec to Gemfile
+* Add WEBrick as development dependency (for Ruby 3.0)
+
 ## 0.4.3
 
 * Use Rack::ContentLength middleware to fix missing
