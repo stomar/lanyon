@@ -23,7 +23,7 @@ def setup_tempdir
 end
 
 def teardown_tempdir
-  FileUtils.rm_rf(TEMP_DIR)  if File.exist?(TEMP_DIR)
+  FileUtils.rm_rf(TEMP_DIR)
 end
 
 def chdir_tempdir
@@ -31,7 +31,7 @@ def chdir_tempdir
 end
 
 def teardown_cachedir
-  FileUtils.rm_rf(CACHE_DIR)  if File.exist?(CACHE_DIR)
+  FileUtils.rm_rf(CACHE_DIR)
 end
 
 def sourcedir
