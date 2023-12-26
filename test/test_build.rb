@@ -17,7 +17,7 @@ describe "when creating a Lanyon application" do
 
     FileUtils.mkdir_p(destdir)
     FileUtils.touch(@no_page)
-    assert  File.exist?(@no_page)
+    assert File.exist?(@no_page)
     assert !File.exist?(@page)
   end
 
