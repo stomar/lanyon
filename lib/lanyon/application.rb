@@ -63,16 +63,16 @@ module Lanyon
     end
 
     def html_wrap(title, content)  # :nodoc:
-      <<-DOCUMENT.gsub(/^ {6}/, "")
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="utf-8">
-        <title>#{title}</title></head>
-      <body>
-        #{content}
-      </body>
-      </html>
+      <<~DOCUMENT
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="utf-8">
+          <title>#{title}</title></head>
+        <body>
+          #{content}
+        </body>
+        </html>
       DOCUMENT
     end
 
