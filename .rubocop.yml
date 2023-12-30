@@ -62,10 +62,10 @@ Style/FrozenStringLiteralComment:
     - demo/config.ru
 
 # Use Ruby 1.9 hash syntax.
-# Do not allow the hash value shorthand syntax of Ruby 3.1.
+# Do not enforce the hash value shorthand syntax of Ruby 3.1.
 Style/HashSyntax:
   EnforcedStyle: ruby19_no_mixed_keys
-  EnforcedShorthandSyntax: never
+  EnforcedShorthandSyntax: either
 
 # Allow parallel assignment.
 Style/ParallelAssignment:
@@ -80,10 +80,3 @@ Style/RegexpLiteral:
 # Use double quotes for string literals.
 Style/StringLiterals:
   EnforcedStyle: double_quotes
-
-
-##### Settings for older Ruby versions #####
-
-# For Ruby <= 2.5.
-Gemspec/RequiredRubyVersion:
-  Enabled: false
