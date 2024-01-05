@@ -1,6 +1,12 @@
 Release History
 ===============
 
+## 0.5.0
+
+* Require Ruby 3.1 or newer
+* Improve code style
+* Update README
+
 ## 0.4.4
 
 * Improve code style
