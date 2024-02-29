@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 3.1.0"
 
   s.add_dependency "jekyll", ">= 2.0"
-  s.add_dependency "rack", ">= 1.6", "< 3.0"
+  s.add_dependency "rack", ">= 1.6", "< 4.0"
 
   s.require_paths = ["lib"]
 
